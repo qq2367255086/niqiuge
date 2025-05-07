@@ -109,8 +109,16 @@
             qr.make();
             const qrElement = document.getElementById(qrId);
             qrElement.innerHTML = qr.createImgTag(2);
+
+            // 检查二维码是否生成，如果没有生成则隐藏提示语
+            if (qrElement.innerHTML === '') {
+                const tipElement = qrElement.nextElementSibling;
+                if (tipElement) {
+                    tipElement.style.display = 'none';
+                }
+            }
         });
     </script>
 </body>
 
-</html>
+</html>    
