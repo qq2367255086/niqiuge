@@ -33,7 +33,7 @@
         #dzm p {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-start;
             border-bottom: 1px solid #ecf0f1;
             padding-bottom: 0.75rem;
             margin-bottom: 0.75rem;
@@ -59,6 +59,14 @@
             flex-direction: column;
             align-items: center;
             gap: 0.25rem;
+            width: 100px; /* 统一二维码容器宽度 */
+            height: 100px; /* 统一二维码容器高度 */
+            margin-left: auto; /* 让二维码容器靠右 */
+        }
+
+       .qrcode-container img {
+            max-width: 100%;
+            max-height: 100%;
         }
 
        .qrcode-tip {
@@ -69,6 +77,11 @@
         #bottom {
             color: #7f8c8d;
             margin-top: 1.5rem;
+        }
+
+       .name-label {
+            width: 100px; /* 固定name的宽度 */
+            display: inline-block;
         }
     </style>
 </head>
@@ -90,14 +103,14 @@
 
         const dzmJson = [
             { "name": "栀子生椰", "url": "https://mrzh.163.com/h5/20250429/yqs/p5sdkElLXg0y2pOn/?pageKey=845a020657f65d9e" },
-            { "name": "什么屯屯鼠", "url": "https://mrzh.163.com/h5/20250428/yqs/M4kYeX6rHso4Nled/?pageKey=3cac951a49cb6d21&traceid=023pIqll2a90sf47blnl25XE4T1pIqlb&p_spanid=0.6LfpJ&c_spanid=0.6LfpJ" },
+            { "name": "什么屯屯鼠", "url": "https://mrzh.163.com/h5/20250428/yqs/M4kYeX6rHso4Nled/?pageKey=3cac951a49cb6d21" },
             { "name": "栀子生椰", "url": "https://mrzh.163.com/h5/20250429/yqs/p5sdkElLXg0y2pOn/?pageKey=845a020657f65d9e" }
         ];
 
         let dzm = '';
         dzmJson.forEach((value, index) => {
             const qrId = `qrcode-${value.name}-${index}`; // 使用索引确保id唯一
-            dzm += `<p class="mb-2">${value.name}: <a href="${value.url}" target="_blank">点击帮Ta种树</a> <span class="qrcode-container"><span id="${qrId}" class="qrcode"></span><span class="qrcode-tip">扫码帮Ta种树</span></span></p><hr class="mb-2">`;
+            dzm += `<p class="mb-2"><span class="name-label">${value.name}</span>: <a href="${value.url}" target="_blank">点击帮Ta种树</a> <span class="qrcode-container"><span id="${qrId}" class="qrcode"></span><span class="qrcode-tip">扫码帮Ta种树</span></span></p><hr class="mb-2">`;
         });
 
         document.getElementById('dzm').innerHTML = dzm;
