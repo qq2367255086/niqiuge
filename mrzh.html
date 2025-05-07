@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>秋日森林*什么*种树链接</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        #dateTitle {
+            color: #2c3e50;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        h4 {
+            color: #7f8c8d;
+        }
+
+        #dzm {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 1.5rem;
+        }
+
+        #dzm p {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ecf0f1;
+            padding-bottom: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        #dzm p:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        #dzm a {
+            color: #3498db;
+            transition: color 0.3s ease;
+        }
+
+        #dzm a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+       .qrcode-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+       .qrcode-tip {
+            color: #95a5a6;
+            font-size: 0.875rem;
+        }
+
+        #bottom {
+            color: #7f8c8d;
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+
+<body class="p-4">
+    <h2 id="dateTitle" class="text-2xl font-bold text-center mb-4"></h2>
+    <h4 class="text-lg font-semibold text-center mb-4">秋日森林·什么</h4>
+    <div id="dzm" class="mx-auto max-w-md"></div>
+    <div id="bottom" class="text-center">需要添加种树链接请找小伟</div>
+
+    <script>
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        const currentDate = `${year}/${month}/${day}`;
+
+        document.getElementById('dateTitle').innerHTML = `${currentDate} 种树链接`;
+
+        const dzmJson = [
+            { "name": "栀子生椰", "url": "https://mrzh.163.com/h5/20250429/yqs/p5sdkElLXg0y2pOn/?pageKey=845a020657f65d9e" },
+            { "name": "栀子生椰", "url": "https://mrzh.163.com/h5/20250429/yqs/p5sdkElLXg0y2pOn/?pageKey=845a020657f65d9e" },
+            { "name": "栀子生椰", "url": "https://mrzh.163.com/h5/20250429/yqs/p5sdkElLXg0y2pOn/?pageKey=845a020657f65d9e" }
+        ];
+
+        let dzm = '';
+        dzmJson.forEach((value, index) => {
+            const qrId = `qrcode-${value.name}-${index}`; // 使用索引确保id唯一
+            dzm += `<p class="mb-2">${value.name}: <a href="${value.url}" target="_blank">点击帮Ta种树</a> <span class="qrcode-container"><span id="${qrId}" class="qrcode"></span><span class="qrcode-tip">扫码帮Ta种树</span></span></p><hr class="mb-2">`;
+        });
+
+        document.getElementById('dzm').innerHTML = dzm;
+
+        dzmJson.forEach((value, index) => {
+            const qrId = `qrcode-${value.name}-${index}`;
+            const qr = qrcode(0, 'L');
+            qr.addData(value.url);
+            qr.make();
+            const qrElement = document.getElementById(qrId);
+            qrElement.innerHTML = qr.createImgTag(2);
+        });
+    </script>
+</body>
+
+</html>
